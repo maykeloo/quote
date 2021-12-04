@@ -109,6 +109,7 @@ const Application = () => {
                 </Bar1>
                 <Bar2>
                   <LinkTo
+                    target="_blank"
                     href={`https://www.google.com/search?q=${
                       data ? data[random].author : "Click roll first!"
                     }`}
