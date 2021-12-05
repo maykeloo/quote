@@ -3,33 +3,26 @@ import React, { useState, useEffect } from "react";
 import {
   Author,
   Authorbar,
-  BackIcon,
-  Bar1,
-  Bar2,
-  Buttonbar,
   Content,
   Contentbar,
   ContentBox,
-  LinkTo,
-  PrevButton,
-  PrevbuttonBox,
-  Quote,
-  Quotebar,
-  Quotebox,
-  QuoteL,
-  QuoteR,
   RightSide,
-  RollbuttonBox,
 } from "./applicationElements";
 
 import axios from "axios";
-import Typewriter from "typewriter-effect";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import QuoteComponent from "./QuoteSide/Quote";
+import ButtonbarComponent from "./Buttonbar/ButtonbarComponent";
 
 const Application = () => {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
+
   const [data, setData] = useState("");
   const [lastData, setLastData] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+
   const [random, setRandom] = useState("");
 
   const getQuote = () => {
@@ -41,10 +34,6 @@ const Application = () => {
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
-        setError(error);
-      })
-      .finally(() => {
-        setLoading(false);
       });
     setRandom(Math.floor(Math.random() * 102));
     setLastData(random);
@@ -60,7 +49,7 @@ const Application = () => {
     <>
       <Content>
         <ContentBox>
-          <Authorbar>
+          <Authorbar data-aos="fade-up" data-aos-delay="100">
             {data ? (
               <Author>{data[random].author}</Author>
             ) : (
@@ -69,72 +58,14 @@ const Application = () => {
           </Authorbar>
           <RightSide>
             <Contentbar>
-              <Quotebar>
-                <Quotebox>
-                  <QuoteL />
-                  <QuoteR />
-                  <Quote>
-                    {data ? (
-                      <Typewriter
-                        options={{
-                          strings: [`${data[random].quote}`],
-                          autoStart: true,
-                          loop: true,
-                          pauseFor: 5000,
-                          delay: 50,
-                        }}
-                      />
-                    ) : (
-                      <Typewriter
-                        options={{
-                          strings: [`Press the button to get your own quote!`],
-                          autoStart: true,
-                          loop: true,
-                          pauseFor: 5000,
-                          delay: 50,
-                        }}
-                      />
-                    )}
-                  </Quote>
-                </Quotebox>
-              </Quotebar>
+              <QuoteComponent data={data} random={random} />
             </Contentbar>
-            <Buttonbar>
-              <PrevbuttonBox>
-                <Bar1>
-                  <PrevButton onClick={setNewData}>
-                    <BackIcon />
-                    <span style={{ fontWeight: "900" }}>Previous quote</span>
-                  </PrevButton>
-                </Bar1>
-                <Bar2>
-                  <LinkTo
-                    target="_blank"
-                    href={`https://www.google.com/search?q=${
-                      data ? data[random].author : "Click roll first!"
-                    }`}
-                  >
-                    About author of quote
-                  </LinkTo>
-                </Bar2>
-              </PrevbuttonBox>
-              <RollbuttonBox>
-                <button
-                  class="button-82-pushable"
-                  role="button"
-                  onClick={getQuote}
-                >
-                  <span class="button-82-shadow"></span>
-                  <span class="button-82-edge"></span>
-                  <span
-                    class="button-82-front text"
-                    style={{ fontSize: "2vmax", fontWeight: "900" }}
-                  >
-                    Draw a quote
-                  </span>
-                </button>
-              </RollbuttonBox>
-            </Buttonbar>
+            <ButtonbarComponent
+              setNewData={setNewData}
+              data={data}
+              getQuote={getQuote}
+              radnom={random}
+            />
           </RightSide>
         </ContentBox>
       </Content>

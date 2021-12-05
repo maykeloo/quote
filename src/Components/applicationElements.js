@@ -22,6 +22,11 @@ export const RightSide = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 1200px)
+    {
+      width: 100%;
+    }
 `
 
 
@@ -31,7 +36,31 @@ export const Quotebar = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 1200px)
+  {
+    flex-direction: column;
+    gap: 50px;
+  }
 `;
+
+export const AuthorbarMobile = styled.div`
+    display: none;
+
+    @media screen and (max-width: 1200px)
+    {
+      display: flex;
+      width: 100%;
+    }
+`
+export const AuthorMobile = styled.span`
+    color: white;
+    transform-origin: right bottom;
+    font-size: 3.5vmax;
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+    `
 
 export const Quotebox = styled.div`
     height: 60%;
@@ -68,6 +97,12 @@ export const Authorbar = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+
+    
+    @media screen and (max-width: 1200px)
+    {
+      display: none;
+    }
 `;
 
 export const Buttonbar = styled.div`
@@ -75,6 +110,14 @@ export const Buttonbar = styled.div`
   height: 25%;
   display: flex;
   justify-content: center;
+  margin-top: 10vh;
+
+  @media screen and (max-width: 1200px)
+  {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
 `;
 
 export const RollbuttonBox = styled.div`
@@ -82,77 +125,71 @@ export const RollbuttonBox = styled.div`
   height: 100%;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
+
 `;
 
 export const PrevbuttonBox = styled.div`
   width: 40%;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+
+  @media screen and (max-width: 1200px)
+  {
+    width: 100%; 
+    align-items: center;
+  }
 `;
 
 export const Bar1 = styled.div`
     width: 100%;
+    @media screen and (max-width: 1200px)
+  {
+    justify-content: center;
+  }
 `
 
 export const PrevButton = styled.button`
     background-color: transparent;
-    border: 2px solid white;
-    padding: 20px 50px;
-    font-size: 2vmin;
+    border: 0;  
+    font-size: 2.5vmin;
     font-weight: bold;
-    width: 70%;
-    color: white;
+    width: 80%;
+    color: #457b9d;
     display: flex;
+    justify-content: space-between;
+    padding: 0;
     gap: 15px;
     position: relative;
     transition: 0.3s;
     cursor: pointer;
 
-    > span {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 10;
-    }
+    @media screen and (max-width: 1200px)
+  {
+    justify-content: space-around;
+  }
 
-    &:after {
-            position: absolute;
-            transition: 0.3s;
-            content: '';
-            bottom: 0;
-            right: 0;
-            width: 0%;
-            height: 100%;
-            background-color: white;
 
-        }
 
     &:hover {
 
-        color: black;
-
-        &:after {
-            position: absolute;
-            content: '';
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background-color: white;
-        }
+        color: white;
+        transform: translateY(-5px);
     }
 `
 
 export const Bar2 = styled.div`
-    width: 100%;
+    margin-top: 20px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
 `
 export const LinkTo = styled.a`
     color: white;
+    font-size: 2vmin;
 `
 
 export const RollButton = styled.button`
@@ -170,6 +207,12 @@ export const QuoteL = styled(RiDoubleQuotesL)`
     left: -4vw;
     font-size: 5vmax;
     color: #e63946;
+
+    @media screen and (max-width: 1200px)
+  {
+    top: -7vw;
+
+  }
 `
 
 export const QuoteR = styled(RiDoubleQuotesR)`
@@ -180,4 +223,11 @@ export const QuoteR = styled(RiDoubleQuotesR)`
     color: #e63946;
 `
 export const BackIcon = styled(RiArrowGoBackFill)``
+
+export const Copy = styled.span`
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 2vmin;
+`
 
