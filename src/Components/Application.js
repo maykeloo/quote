@@ -3,17 +3,26 @@ import React, { useState, useEffect } from "react";
 import {
   Author,
   Authorbar,
+  BackIcon,
+  Bar1,
+  Bar2,
+  Buttonbar,
   Content,
   Contentbar,
   ContentBox,
+  Copy,
+  LinkTo,
+  PrevButton,
+  PrevbuttonBox,
   RightSide,
+  RollbuttonBox,
 } from "./applicationElements";
 
 import axios from "axios";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import QuoteComponent from "./QuoteSide/Quote";
-import ButtonbarComponent from "./Buttonbar/ButtonbarComponent";
 
 const Application = () => {
   useEffect(() => {
@@ -25,7 +34,6 @@ const Application = () => {
   const [random, setRandom] = useState("");
 
 
-  
   const getQuote = () => {
     axios(
       "https://gist.githubusercontent.com/natebass/b0a548425a73bdf8ea5c618149fe1fce/raw/f4231cd5961f026264bb6bb3a6c41671b044f1f4/quotes.json"
@@ -41,12 +49,12 @@ const Application = () => {
   };
 
 
-
   const setNewData = () => {
     if (lastData) {
       setRandom(lastData);
     }
   };
+
 
   return (
     <>
@@ -61,14 +69,53 @@ const Application = () => {
           </Authorbar>
           <RightSide>
             <Contentbar>
-              <QuoteComponent data={data} random={random} />
+              <QuoteComponent data={data} random={random}/>
             </Contentbar>
-            <ButtonbarComponent
-              setNewData={setNewData}
-              data={data}
-              getQuote={getQuote}
-              radnom={random}
-            />
+            <Buttonbar>
+              <RollbuttonBox data-aos="fade-left" data-aos-delay="700">
+                <button
+                  className="button-82-pushable"
+                  role="button"
+                  onClick={getQuote}
+                >
+                  <span className="button-82-shadow"></span>
+                  <span className="button-82-edge"></span>
+                  <span
+                    className="button-82-front text"
+                    style={{ fontSize: "2vmax", fontWeight: "900" }}
+                  >
+                    Draw a quote
+                  </span>
+                </button>
+              </RollbuttonBox>
+              <PrevbuttonBox data-aos="fade-left" data-aos-delay="300">
+                <Bar1>
+                  <PrevButton onClick={setNewData}>
+                    <BackIcon />
+                    <span style={{ fontWeight: "900" }}>Previous quote</span>
+                  </PrevButton>
+                </Bar1>
+                <Bar2>
+                  <LinkTo
+                    target="_blank"
+                    href={`https://www.google.com/search?q=${
+                      data ? data[random].author : "Click roll first!"
+                    }`}
+                  >
+                    About author of quote
+                  </LinkTo>
+                  <CopyToClipboard
+                    text={
+                      data
+                        ? `${data[random].author} "${data[random].quote}"`
+                        : null
+                    }
+                  >
+                    <Copy>Copy</Copy>
+                  </CopyToClipboard>
+                </Bar2>
+              </PrevbuttonBox>
+            </Buttonbar>
           </RightSide>
         </ContentBox>
       </Content>

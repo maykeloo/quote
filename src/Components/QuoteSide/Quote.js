@@ -13,7 +13,7 @@ import Typewriter from "typewriter-effect";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-function QuoteComponent({ data, random }) {
+const QuoteComponent = ({ data, random }) => {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
